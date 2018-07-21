@@ -2,9 +2,32 @@
   "name": "cusine-finder",
   "version": "1.0.0",
   "description": "This is a reactjs app",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.3.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "author": "Jason Bai",
   "license": "MIT"
