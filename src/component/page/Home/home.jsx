@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import LocationSearchBox from '../../core/LocationSearchBox/locationSearchBox';
 
 const Home = ({ classes }) => (
   <Grid container direction="column" className={classes.dimension}>
@@ -22,7 +23,9 @@ const Home = ({ classes }) => (
       </AppBar>
     </Grid>
     <Grid item className={classes.flex}>
-      Search box here
+      <Grid item xs={12} sm={10} md={8} className={classes.searchBoxContainer}>
+        <LocationSearchBox />
+      </Grid>
     </Grid>
   </Grid>
 );
@@ -31,6 +34,7 @@ Home.propTypes = {
   classes: PropTypes.shape({
     flex: PropTypes.string,
     dimension: PropTypes.string,
+    searchBoxContainer: PropTypes.string,
   }).isRequired,
 };
 
@@ -40,6 +44,10 @@ const styles = {
   },
   dimension: {
     height: '100%',
+  },
+  searchBoxContainer: {
+    marginTop: '160px',
+    margin: '0 auto',
   },
 };
 
