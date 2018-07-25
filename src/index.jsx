@@ -9,15 +9,19 @@ import saga from './sagas';
 import './styles/main.css';
 
 const sagaMiddleware = createSagaMiddleware();
+const logger = store => next => (action) => {
+  console.group('Dispatching', action.type);
+  console.log('Prev State', store.getState());
+  console.log('Action', action);
+  next(action);
+  console.log('Next State', store.getState());
+  console.groupEnd();
+};
 const store = createStore(
   reducer,
-  applyMiddleware(sagaMiddleware),
+  applyMiddleware(sagaMiddleware, logger),
 );
 sagaMiddleware.run(saga);
-
-store.subscribe(() => {
-  console.log(store.getState());
-});
 
 ReactDOM.render(
   <Provider store={store}>
