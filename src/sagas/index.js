@@ -3,6 +3,7 @@ import * as saga from './sagas';
 
 export default function* () {
   yield [
-    fork(saga.watchFatchLocations),
+    fork(saga.watchFetchLocations),
+    fork(saga.watchFetchLocationDetail),
   ];
 }
