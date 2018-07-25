@@ -16,7 +16,7 @@ class LocationSearchBox extends React.Component {
 
   handleUserSearch(e) {
     const { fetchLocations } = this.props;
-    fetchLocations(e.target.value);
+    if (e.target.value.length > 2) fetchLocations(e.target.value);
   }
 
   render() {

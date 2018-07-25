@@ -1,16 +1,27 @@
-import { call, put, takeLatest } from 'redux-saga-effects';
+import {
+  call, put, takeLatest, cancelled
+} from 'redux-saga-effects';
+import axios from 'axios';
 import services from './services';
 import * as types from '../actions/types';
 import locationActionCreators from '../actions/location';
 
+const cancelToken = axios.CancelToken;
+const showError = process.env.NODE_ENV === 'development';
+
 function* fetchLocations(action) {
+  const tokenSrc = cancelToken.source();
   try {
-    const response = yield call(services.fetchLocations, action.payload);
+    const response = yield call(services.fetchLocations, action.payload, tokenSrc.token);
     const locations = response ? response.data.location_suggestions.map(d => d.name) : [];
     yield put(locationActionCreators.setLocations(locations));
   } catch (error) {
     // TODO: add a popup to show error message
-    console.log(error);
+    if (showError) console.log(error);
+  } finally {
+    if (yield cancelled()) {
+      tokenSrc.cancel('fetch locations call cancelled');
+    }
   }
 }
 
@@ -29,7 +40,7 @@ function* fetchLocationDetail(action) {
     }
   } catch (error) {
     // TODO: add a popup to show error message
-    console.log(error);
+    if (showError) console.log(error);
   }
 }
 
