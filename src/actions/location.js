@@ -7,6 +7,13 @@ function fetchLocations(query) {
   };
 }
 
+function selectLocations(location) {
+  return {
+    type: types.SELECT_LOCATION,
+    payload: location,
+  };
+}
+
 function setLocations(locations) {
   return {
     type: types.SET_LOCATIONS,
@@ -16,5 +23,6 @@ function setLocations(locations) {
 
 export default {
   fetchLocations,
+  selectLocations,
   setLocations,
 };

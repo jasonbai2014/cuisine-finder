@@ -20,7 +20,7 @@ class LocationSearchBox extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, locations } = this.props;
     return (
       <Grid container>
         <Grid item xs={12} sm={7} md={8}>
@@ -76,9 +76,9 @@ const styles = {
   },
 };
 
-const mapStateToProps = (state) => ({ locations: state.Locations });
+const mapStateToProps = state => ({ locations: state.Locations });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   fetchLocations: (query) => {
     dispatch(locationActionCreators.fetchLocations(query));
   },
