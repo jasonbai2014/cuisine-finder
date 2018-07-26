@@ -1,5 +1,5 @@
 import {
-  call, put, takeLatest, cancelled
+  call, put, takeLatest, cancelled,
 } from 'redux-saga-effects';
 import axios from 'axios';
 import services from './services';
