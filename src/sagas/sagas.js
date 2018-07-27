@@ -6,6 +6,7 @@ import services from './services';
 import * as types from '../actions/types';
 import locationActionCreators from '../actions/location';
 import restaurantActionCreators from '../actions/restaurant';
+import errorActionCreators from '../actions/error';
 
 const cancelToken = axios.CancelToken;
 const showError = process.env.NODE_ENV === 'development';
@@ -17,7 +18,7 @@ function* fetchLocations(action) {
     const locations = response ? response.data.location_suggestions.map(d => d.name) : [];
     yield put(locationActionCreators.setLocations(locations));
   } catch (error) {
-    // TODO: add a popup to show error message
+    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching locations'));
     if (showError) console.log(error);
   } finally {
     if (yield cancelled()) {
@@ -53,7 +54,7 @@ function* fetchLocationDetail(action) {
       }
     }
   } catch (error) {
-    // TODO: add a popup to show error message
+    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching restaurants'));
     if (showError) console.log(error);
   }
 }
