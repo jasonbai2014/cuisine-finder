@@ -5,6 +5,7 @@ import axios from 'axios';
 import services from './services';
 import * as types from '../actions/types';
 import locationActionCreators from '../actions/location';
+import restaurantActionCreators from '../actions/restaurant';
 
 const cancelToken = axios.CancelToken;
 const showError = process.env.NODE_ENV === 'development';
@@ -36,7 +37,20 @@ function* fetchLocationDetail(action) {
       const type = locationResponse.data.location_suggestions[0].entity_type;
       const id = locationResponse.data.location_suggestions[0].entity_id;
       const detailResponse = yield call(services.fetchLocationDetail, id, type);
-      // TODO: need to add an action creator to put cuisine info into the store
+      if (detailResponse) {
+        const restaurants = detailResponse.data.best_rated_restaurant.map(res => ({
+          cuisines: res.restaurant.cuisines,
+          address: res.restaurant.location.address,
+          lat: res.restaurant.latitude,
+          lon: res.restaurant.location.longitude,
+          menu_url: res.restaurant.menu_url,
+          name: res.restaurant.name,
+          photos_url: res.restaurant.photos_url,
+          rating: res.restaurant.user_rating.aggregate_rating,
+          votes: res.restaurant.user_rating.votes,
+        }));
+        yield put(restaurantActionCreators.setRestaurants(restaurants));
+      }
     }
   } catch (error) {
     // TODO: add a popup to show error message
