@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import LocationSearchBox from '../../core/LocationSearchBox/locationSearchBox';
+import ErrorDialog from '../../core/ErrorDialog/errorDialog';
 
 const Home = ({ classes }) => (
   <Grid container direction="column" className={classes.dimension}>
@@ -27,6 +28,7 @@ const Home = ({ classes }) => (
         <LocationSearchBox />
       </Grid>
     </Grid>
+    <ErrorDialog />
   </Grid>
 );
 

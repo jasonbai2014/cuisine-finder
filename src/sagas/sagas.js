@@ -18,7 +18,7 @@ function* fetchLocations(action) {
     const locations = response ? response.data.location_suggestions.map(d => d.name) : [];
     yield put(locationActionCreators.setLocations(locations));
   } catch (error) {
-    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching locations'));
+    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching locations.'));
     if (showError) console.log(error);
   } finally {
     if (yield cancelled()) {
@@ -54,7 +54,7 @@ function* fetchLocationDetail(action) {
       }
     }
   } catch (error) {
-    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching restaurants'));
+    yield put(errorActionCreators.setErrorMessage('An error occurred when fetching restaurants.'));
     if (showError) console.log(error);
   }
 }
