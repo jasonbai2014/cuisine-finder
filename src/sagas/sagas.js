@@ -7,6 +7,7 @@ import * as types from '../actions/types';
 import locationActionCreators from '../actions/location';
 import restaurantActionCreators from '../actions/restaurant';
 import errorActionCreators from '../actions/error';
+import loadingActionCreators from '../actions/loading';
 
 const cancelToken = axios.CancelToken;
 const showError = process.env.NODE_ENV === 'development';
@@ -32,7 +33,9 @@ export function* watchFetchLocations() {
 }
 
 function* fetchLocationDetail(action) {
+  const loadingId = `fetchLocation-${Math.random()}`;
   try {
+    yield put(loadingActionCreators.setLoadingId(loadingId));
     const locationResponse = yield call(services.fetchLocationEntity, action.payload);
     if (locationResponse && locationResponse.data.location_suggestions.length > 0) {
       const type = locationResponse.data.location_suggestions[0].entity_type;
@@ -56,6 +59,8 @@ function* fetchLocationDetail(action) {
   } catch (error) {
     yield put(errorActionCreators.setErrorMessage('An error occurred when fetching restaurants.'));
     if (showError) console.log(error);
+  } finally {
+    yield put(loadingActionCreators.removeLoadingId(loadingId));
   }
 }
 
