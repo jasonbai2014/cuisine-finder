@@ -14,8 +14,21 @@ class LocationSearchBox extends React.Component {
     this.state = {
       selectedLocation: '',
     };
+    this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleUserSearch = this.handleUserSearch.bind(this);
     this.handleSelectLocation = this.handleSelectLocation.bind(this);
+  }
+
+  handleBtnClick() {
+    if (navigator.geolocation) {
+      const { fetchLocations } = this.props;
+      navigator.geolocation.getCurrentPosition((position) => {
+        fetchLocations({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      });
+    }
   }
 
   handleUserSearch(e) {
@@ -74,7 +87,13 @@ class LocationSearchBox extends React.Component {
           </div>
         </Grid>
         <Grid item xs={12} sm={5} md={4}>
-          <Button variant="contained" color="primary" fullWidth className={classes.locationBtn}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.locationBtn}
+            onClick={this.handleBtnClick}
+            fullWidth
+          >
             <Room />
             Current Location
           </Button>

@@ -15,7 +15,9 @@ const showError = process.env.NODE_ENV === 'development';
 function* fetchLocations(action) {
   const tokenSrc = cancelToken.source();
   try {
-    const response = yield call(services.fetchLocations, action.payload, tokenSrc.token);
+    const response = typeof action.payload === 'object' && action.payload.lat && action.payload.lon
+      ? yield call(services.fetchLocations, tokenSrc.token, '', action.payload.lat, action.payload.lon)
+      : yield call(services.fetchLocations, tokenSrc.token, action.payload);
     const locations = response ? response.data.location_suggestions.map(d => d.name) : [];
     yield put(locationActionCreators.setLocations(locations));
   } catch (error) {
