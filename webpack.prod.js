@@ -5,7 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = merge(common, {
   entry: {
     vendor: ['react', 'react-dom', '@material-ui/core', '@material-ui/icons', 'redux', 'react-redux', 'redux-saga',
-      'redux-saga-effects', 'axios'],
+      'redux-saga-effects', 'axios', 'react-router', 'react-router-dom'],
   },
   output: {
     filename: '[name].[chunkhash].js',

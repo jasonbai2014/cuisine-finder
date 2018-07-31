@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocationSearchBox from '../../core/LocationSearchBox/locationSearchBox';
 import ErrorDialog from '../../core/ErrorDialog/errorDialog';
+import NotFound from '../notFound/notFound';
 
 const Home = ({ classes, loading }) => (
   <Grid container direction="column" className={classes.dimension}>
@@ -26,9 +28,18 @@ const Home = ({ classes, loading }) => (
       </AppBar>
     </Grid>
     <Grid item className={classes.flex}>
-      <Grid item xs={12} sm={10} md={8} className={classes.searchBoxContainer}>
-        <LocationSearchBox />
-      </Grid>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Grid item xs={12} sm={10} md={8} className={classes.searchBoxContainer}>
+              <LocationSearchBox />
+            </Grid>
+          )}
+        />
+        <Route component={NotFound} />
+      </Switch>
     </Grid>
     <ErrorDialog />
     {
