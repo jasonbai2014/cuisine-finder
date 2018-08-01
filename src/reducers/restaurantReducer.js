@@ -6,12 +6,12 @@ export default function (state = [], action) {
       return action.payload.map(res => ({
         cuisines: res.cuisines,
         address: res.address,
-        lat: res.latitude,
-        lon: res.longitude,
+        lat: res.lat,
+        lon: res.lon,
         menu_url: res.menu_url,
         name: res.name,
         photos_url: res.photos_url,
-        rating: res.aggregate_rating,
+        rating: res.rating,
         votes: res.votes,
       }));
     default:

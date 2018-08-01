@@ -47,7 +47,7 @@ function* fetchLocationDetail(action) {
         const restaurants = detailResponse.data.best_rated_restaurant.map(res => ({
           cuisines: res.restaurant.cuisines,
           address: res.restaurant.location.address,
-          lat: res.restaurant.latitude,
+          lat: res.restaurant.location.latitude,
           lon: res.restaurant.location.longitude,
           menu_url: res.restaurant.menu_url,
           name: res.restaurant.name,
@@ -55,6 +55,7 @@ function* fetchLocationDetail(action) {
           rating: res.restaurant.user_rating.aggregate_rating,
           votes: res.restaurant.user_rating.votes,
         }));
+        console.log(restaurants)
         yield put(restaurantActionCreators.setRestaurants(restaurants));
       }
     }
