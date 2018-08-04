@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,7 +29,7 @@ const Home = ({ classes, loading }) => (
         </Toolbar>
       </AppBar>
     </Grid>
-    <Grid item className={classes.flex}>
+    <Grid item className={classes.content}>
       <Switch>
         <Route
           exact
@@ -45,14 +46,18 @@ const Home = ({ classes, loading }) => (
     </Grid>
     <ErrorDialog />
     {
-      loading.size === 0 ? null
-        : (
-          <div className={classes.loadingIconContainer}>
-            <div className={classes.loadingIcon}>
-              <CircularProgress />
-            </div>
+      loading ? (
+        <div className={classes.loadingIconContainer}>
+          <div className={classes.loadingIcon}>
+            <CircularProgress />
           </div>
-        )
+        </div>
+      ) : null
+    }
+    {
+      !loading ? null : (
+        <Redirect from="/" to="/location-details" />
+      )
     }
   </Grid>
 );
@@ -64,11 +69,12 @@ Home.propTypes = {
     searchBoxContainer: PropTypes.string,
     loadingIconContainer: PropTypes.string,
     loadingIcon: PropTypes.string,
+    content: PropTypes.string,
   }).isRequired,
-  loading: PropTypes.isPrototypeOf(Set).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({ loading: state.Loading });
+const mapStateToProps = state => ({ loading: state.Loading.size > 0 });
 
 const styles = {
   flex: {
@@ -76,6 +82,9 @@ const styles = {
   },
   dimension: {
     height: '100%',
+  },
+  content: {
+    height: 'calc(100% - 64px)',
   },
   searchBoxContainer: {
     marginTop: '160px',
@@ -99,4 +108,4 @@ const styles = {
 };
 
 const styledComponent = withStyles(styles)(Home);
-export default connect(mapStateToProps, () => ({}))(styledComponent);
+export default withRouter(connect(mapStateToProps, () => ({}))(styledComponent));

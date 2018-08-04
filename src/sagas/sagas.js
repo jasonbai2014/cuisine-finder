@@ -55,7 +55,6 @@ function* fetchLocationDetail(action) {
           rating: res.restaurant.user_rating.aggregate_rating,
           votes: res.restaurant.user_rating.votes,
         }));
-        console.log(restaurants)
         yield put(restaurantActionCreators.setRestaurants(restaurants));
       }
     }
