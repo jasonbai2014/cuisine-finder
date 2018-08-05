@@ -5,16 +5,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
 import Grid from '@material-ui/core/Grid';
 import DetailsList from '../DetailsList/detailsList';
+import LocationDetail from '../LocationDetail/locationDetail';
 
 const LocationDetails = ({ classes, match }) => (
   <Grid container className={classes.dimension}>
     <Grid item md={2} className={classes.detailsList}>
       {
-        match.params.locationId ? <div>Detail sidebar placeholder</div> : <DetailsList />
+        match.params.locationId ? <LocationDetail locationId={match.params.locationId} />
+          : <DetailsList />
       }
     </Grid>
     <Grid item md={10}>
-      
+
     </Grid>
   </Grid>
 )
