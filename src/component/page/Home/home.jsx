@@ -12,8 +12,8 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocationSearchBox from '../../core/LocationSearchBox/locationSearchBox';
 import ErrorDialog from '../../core/ErrorDialog/errorDialog';
-import NotFound from '../notFound/notFound';
-import LocationDetails from '../locationDetails/locationDetails';
+import NotFound from '../NotFound/notFound';
+import LocationDetails from '../LocationDetails/locationDetails';
 
 const Home = ({ classes, loading }) => (
   <Grid container direction="column" className={classes.dimension}>
@@ -40,7 +40,7 @@ const Home = ({ classes, loading }) => (
             </Grid>
           )}
         />
-        <Route path="/location-details" component={LocationDetails} />
+        <Route exact path="/location-details/:locationId?" component={LocationDetails} />
         <Route component={NotFound} />
       </Switch>
     </Grid>
