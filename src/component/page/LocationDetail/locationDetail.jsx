@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Rating from '../../core/Rating/rating';
 
 const LocationDetail = ({ classes, restaurants, locationId }) => {
   let restaurant = null;
@@ -33,12 +34,7 @@ const LocationDetail = ({ classes, restaurants, locationId }) => {
             </a>
           </div>
           <div className={classes.detailItem}>
-            <span>
-              {`Rating: ${restaurant.rating}`}
-            </span>
-            <span>
-              {`${restaurant.votes} Votes`}
-            </span>
+            <Rating rating={restaurant.rating} votes={restaurant.votes} />
           </div>
         </Fragment>
       ) : (
