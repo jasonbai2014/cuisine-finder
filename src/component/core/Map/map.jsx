@@ -2,10 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import LocationMap from '../../../modules/map';
 
 class Map extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: null,
+    };
+  }
+
+  componentDidMount() {
+    const { id } = this.props;
+    this.setState({
+      map: new LocationMap(id, 0, 0),
+    });
+  }
+
   componentDidUpdate() {
     const { restaurants } = this.props;
+    const { map } = this.state;
+    if (map) {
+      // TODO: show popups on the map for restaurants
+    }
   }
 
   render() {

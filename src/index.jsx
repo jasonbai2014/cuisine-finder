@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faStarHalf,  } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
 import Home from './component/page/Home/home';
 import reducer from './reducers';
 import saga from './sagas';

@@ -38,6 +38,7 @@
     "@material-ui/icons": "^2.0.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "ol": "^5.1.3",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
