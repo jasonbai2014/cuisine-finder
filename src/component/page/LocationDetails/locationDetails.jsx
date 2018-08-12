@@ -6,6 +6,7 @@ import { withRouter } from 'react-router';
 import Grid from '@material-ui/core/Grid';
 import DetailsList from '../DetailsList/detailsList';
 import LocationDetail from '../LocationDetail/locationDetail';
+import Map from '../../core/Map/map';
 
 const LocationDetails = ({ classes, match }) => (
   <Grid container className={classes.dimension}>
@@ -16,7 +17,7 @@ const LocationDetails = ({ classes, match }) => (
       }
     </Grid>
     <Grid item md={10}>
-
+      <Map id="restaurants-map" />
     </Grid>
   </Grid>
 )
