@@ -21,8 +21,16 @@ function setLocations(locations) {
   };
 }
 
+function setCityCoords(coords) {
+  return {
+    type: types.SET_CITY_COORDS,
+    payload: coords,
+  };
+}
+
 export default {
   fetchLocations,
   selectLocations,
   setLocations,
+  setCityCoords,
 };

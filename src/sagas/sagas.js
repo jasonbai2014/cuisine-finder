@@ -56,6 +56,10 @@ function* fetchLocationDetail(action) {
           votes: res.restaurant.user_rating.votes,
         }));
         yield put(restaurantActionCreators.setRestaurants(restaurants));
+        yield put(locationActionCreators.setCityCoords([
+          locationResponse.data.location_suggestions[0].latitude,
+          locationResponse.data.location_suggestions[0].longitude,
+        ]));
       }
     }
   } catch (error) {

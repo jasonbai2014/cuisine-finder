@@ -13,16 +13,17 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props;
+    const { id, coords } = this.props;
     this.setState({
-      map: new LocationMap(id, 0, 0),
+      map: new LocationMap(id, coords[0], coords[1]),
     });
   }
 
   componentDidUpdate() {
-    const { restaurants } = this.props;
+    const { restaurants, coords } = this.props;
     const { map } = this.state;
     if (map) {
+      map.setCenter(coords[0], coords[1]);
       // TODO: show popups on the map for restaurants
     }
   }
@@ -47,6 +48,7 @@ Map.propTypes = {
     rating: PropTypes.string,
     votes: PropTypes.string,
   })).isRequired,
+  coords: PropTypes.arrayOf(PropTypes.number).isRequired,
   id: PropTypes.string.isRequired,
   classes: PropTypes.shape({
     dimension: PropTypes.string,
@@ -60,7 +62,7 @@ const styles = {
   },
 };
 
-const mapStateToProps = state => ({ restaurants: state.Restaurants });
+const mapStateToProps = state => ({ restaurants: state.Restaurants, coords: state.CityCoords });
 
 const styledComponent = withStyles(styles)(Map);
 export default connect(mapStateToProps)(styledComponent);
