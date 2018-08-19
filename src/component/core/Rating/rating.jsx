@@ -43,7 +43,7 @@ const styles = {
   },
   votes: {
     padding: '0 10px',
-  }
+  },
 };
 
 export default withStyles(styles)(Rating);

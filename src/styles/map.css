@@ -1,0 +1,13 @@
+.overlay {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ea3f25;
+}
+
+.overlay-label {
+    color: black;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 5px;
+}

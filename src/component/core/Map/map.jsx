@@ -24,7 +24,7 @@ class Map extends React.Component {
     const { map } = this.state;
     if (map) {
       map.setCenter(coords[0], coords[1]);
-      // TODO: show popups on the map for restaurants
+      map.setLocationOverlays(restaurants);
     }
   }
 
